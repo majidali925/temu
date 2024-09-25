@@ -5,6 +5,7 @@ import Inputx from "../components/Input";
 import axios from "axios";
 import "dotenv/config";
 import { signIn } from "next-auth/react";
+import GoogleLoginButton from "../components/googlelogin";
 
 const Register = () => {
   const {
@@ -38,7 +39,7 @@ const Register = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <Inputx
               name="first_name"
               label="First Name"
@@ -97,20 +98,7 @@ const Register = () => {
             </div>
           </form>
 
-          <hr />
-          <h2>Or sign in with Google</h2>
-          <button
-            onClick={() => signIn("google")}
-            style={{
-              padding: "10px 20px",
-              backgroundColor: "#4285F4",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}>
-            Sign in with Google
-          </button>
+          <GoogleLoginButton />
         </div>
       </div>
     </>

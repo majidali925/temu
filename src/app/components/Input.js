@@ -8,10 +8,8 @@ const Inputx = ({
   validation = {},
   ...props
 }) => (
-  <>
-    <label
-      className="block text-sm font-medium leading-6 text-gray-900"
-      htmlFor={name}>
+  <div className="my-3">
+    <label className="block text-sm font-medium text-gray-900" htmlFor={name}>
       {label}
     </label>
     <input
@@ -27,7 +25,7 @@ const Inputx = ({
     {errors[name] && (
       <p className="text-red-500 text-xs mt-1">{errors[name].message}</p>
     )}
-  </>
+  </div>
 );
 
 export default Inputx;

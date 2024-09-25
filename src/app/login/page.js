@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import Inputx from "../components/Input";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import GoogleLoginButton from "../components/googlelogin";
 
 const Login = () => {
   const {
@@ -101,6 +102,7 @@ const Login = () => {
               Register Here!
             </Link>
           </p>
+          <GoogleLoginButton />
         </div>
       </div>
     </>

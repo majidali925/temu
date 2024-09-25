@@ -42,7 +42,6 @@ const handler = NextAuth({
       if (account) {
         token.accessToken = account.access_token;
       }
-
       if (user) {
         token.name =
           account.provider === "google"
