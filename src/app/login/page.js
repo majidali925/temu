@@ -20,7 +20,7 @@ const Login = () => {
       password: values.password,
     });
     if (result.error) {
-      console.log("error");
+      console.log("error", result);
     } else {
       // console.log("Signed in successfully", result);
       router.push("/dashboard");
