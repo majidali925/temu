@@ -24,7 +24,7 @@ const Login = () => {
       console.log("error", result);
     } else {
       // console.log("Signed in successfully", result);
-      router.push("/dashboard");
+      router.push("/");
     }
   };
 
@@ -34,7 +34,7 @@ const Login = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Your Company"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="./logo.svg"
             className="mx-auto h-10 w-auto"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">

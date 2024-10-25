@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import Inputx from "../components/Input";
 import axios from "axios";
 import "dotenv/config";
-import { signIn } from "next-auth/react";
 import GoogleLoginButton from "../components/googlelogin";
 
 const Register = () => {
@@ -30,8 +29,9 @@ const Register = () => {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             alt="Your Company"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            className="mx-auto h-10 w-auto"
+            // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="./logo.svg"
+            className="mx-auto h-12"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Register your account
