@@ -20,9 +20,8 @@ const handler = NextAuth({
           email: credentials?.email,
           password: credentials?.password,
         };
-        console.log({ env: process.env.BACKEND_URL, user });
         const res = await axios.post(
-          `${process.env.BACKEND_URL}/auth/login`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`,
           user
         );
         if (res.status === 200 && user) {
