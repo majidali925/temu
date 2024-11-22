@@ -16,11 +16,17 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const res = await axios.post(`${process.env.NEXTAUTH_URL}/api/login`, {
-          credentials,
-        });
-        const { user } = res.data;
+        const user = {
+          email: credentials?.email,
+          password: credentials?.password,
+        };
+        console.log({ env: process.env.BACKEND_URL, user });
+        const res = await axios.post(
+          `${process.env.BACKEND_URL}/auth/login`,
+          user
+        );
         if (res.status === 200 && user) {
+          user.access_token = res?.data?.access_token;
           return user;
         }
 
@@ -38,23 +44,23 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, account, user }) {
       // Persist the OAuth access_token to the token right after signin
+      console.log({ token, account, user });
 
       if (account) {
         token.accessToken = account.access_token;
       }
       if (user) {
         token.name =
-          account.provider === "google"
-            ? user.name
-            : `${user.first_name} ${user.last_name}`;
+          account.provider === "google" ? user.name : `${user.email}`;
+        token.accessToken = user.access_token;
       }
 
       return token;
     },
     async session({ session, token }) {
       // Send properties to the client, like an access_token from a provider.
-      (session.accessToken = token.accessToken),
-        (session.user.name = token.name);
+      session.accessToken = token.accessToken;
+      session.user.name = token.name;
 
       return session;
     },
