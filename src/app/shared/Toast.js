@@ -1,7 +1,5 @@
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 export function Toast(message) {
-  return toast.success(message, {
-    position: "top-center",
-  });
+  return toast.success(message);
 }
