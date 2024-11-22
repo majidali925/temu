@@ -5,6 +5,8 @@ import Inputx from "../components/Input";
 import axios from "axios";
 import "dotenv/config";
 import GoogleLoginButton from "../components/googlelogin";
+import { useRouter } from "next/navigation";
+import { Toast } from "../shared/Toast";
 
 const Register = () => {
   const {
@@ -12,12 +14,18 @@ const Register = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const router = useRouter();
   const onSubmit = async (values) => {
     try {
-      const response = await axios.post("/api/register", {
-        data: values,
-      });
-      console.log({ response });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`,
+        values
+      );
+      if (response.data.success) {
+        Toast(response.data.message);
+        router.push("/login");
+      }
     } catch (err) {
       console.log({ err });
     }
@@ -41,7 +49,7 @@ const Register = () => {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form onSubmit={handleSubmit(onSubmit)}>
             <Inputx
-              name="first_name"
+              name="firstName"
               label="First Name"
               required
               register={register}
@@ -54,7 +62,7 @@ const Register = () => {
               errors={errors}
             />
             <Inputx
-              name="last_name"
+              name="lastName"
               label="Last Name"
               register={register}
               errors={errors}
