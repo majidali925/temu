@@ -23,11 +23,11 @@ const Register = () => {
         values
       );
       if (response.data.success) {
-        Toast(response.data.message);
+        Toast({ message: response.data.message });
         router.push("/login");
       }
-    } catch (err) {
-      console.log({ err });
+    } catch ({ response }) {
+      Toast({ message: response.data.message, type: "error" });
     }
   };
 
