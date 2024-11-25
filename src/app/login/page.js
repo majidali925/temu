@@ -17,12 +17,12 @@ const Login = () => {
 
   const onSubmit = async (values) => {
     try {
-      const response = await signIn("credentials", {
+      await signIn("credentials", {
         redirect: false,
         email: values.email,
         password: values.password,
       });
-      // if (response) Toast({ message: "login Successful" });
+
       router.push("/");
     } catch (error) {
       // Toast(error.error, "error");
