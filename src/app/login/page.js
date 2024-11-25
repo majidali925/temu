@@ -3,8 +3,9 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import Inputx from "../components/Input";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import GoogleLoginButton from "../components/googlelogin";
+import { Toast } from "../shared/Toast";
 
 const Login = () => {
   const {
@@ -15,16 +16,16 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (values) => {
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: values.email,
-      password: values.password,
-    });
-    if (result.error) {
-      console.log("error", result);
-    } else {
-      // console.log("Signed in successfully", result);
+    try {
+      const response = await signIn("credentials", {
+        redirect: false,
+        email: values.email,
+        password: values.password,
+      });
+      // if (response) Toast({ message: "login Successful" });
       router.push("/");
+    } catch (error) {
+      // Toast(error.error, "error");
     }
   };
 

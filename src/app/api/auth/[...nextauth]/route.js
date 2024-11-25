@@ -26,6 +26,7 @@ const handler = NextAuth({
         );
         if (res.status === 200 && user) {
           user.access_token = res?.data?.access_token;
+          user.name = `${res?.data?.user?.firstName} ${res?.data?.user?.lastName}`;
           return user;
         }
 
@@ -43,14 +44,17 @@ const handler = NextAuth({
   callbacks: {
     async jwt({ token, account, user }) {
       // Persist the OAuth access_token to the token right after signin
-      console.log({ token, account, user });
+      // console.log({ token, account, user }, "front");
 
       if (account) {
         token.accessToken = account.access_token;
       }
       if (user) {
-        token.name =
-          account.provider === "google" ? user.name : `${user.email}`;
+        token.name = user.name
+          ? user.name
+          : account.provider === "google"
+          ? user.name
+          : `${user.email}`;
         token.accessToken = user.access_token;
       }
 
@@ -60,7 +64,6 @@ const handler = NextAuth({
       // Send properties to the client, like an access_token from a provider.
       session.accessToken = token.accessToken;
       session.user.name = token.name;
-
       return session;
     },
   },
