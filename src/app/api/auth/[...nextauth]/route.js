@@ -42,9 +42,12 @@ const handler = NextAuth({
     signIn: "/login", // Redirect to your custom login page
   },
   callbacks: {
+    async signIn({ account, profile }) {
+      return true;
+    },
+
     async jwt({ token, account, user }) {
       // Persist the OAuth access_token to the token right after signin
-      // console.log({ token, account, user }, "front");
 
       if (account) {
         token.accessToken = account.access_token;

@@ -69,7 +69,6 @@ export default function Header() {
             <button
               onClick={() => {
                 signOut();
-                console.log("i m clicked");
               }}
               className="text-sm font-semibold leading-6 text-red-400">
               Logout
