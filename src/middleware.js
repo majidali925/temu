@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ["/"];
+const protectedRoutes = ["/", "/products", "/products/addproduct"];
 const publicRoutes = ["/login", "/register"];
 const secret = process.env.NEXTAUTH_SECRET;
 

@@ -7,10 +7,16 @@
 }
 
 .product-form-container {
-  padding: 100px;
+  padding: 2% 25%;
   .product-form {
     padding: 20px;
     border-radius: 16px;
     border: 2px solid gray;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 5% 5%;
+    .inputNumber {
+      width: 100%;
+    }
   }
 }

@@ -26,6 +26,15 @@ export default function AddProduct() {
             errors={errors}
             register={register}
           />
+          <Inputx
+            required
+            type="number"
+            name="price"
+            label={"Price"}
+            errors={errors}
+            register={register}
+            className="inputNumber"
+          />
           <button type="submit" className="signin-btn">
             Create
           </button>
