@@ -1,14 +1,18 @@
 "use client";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { routeNames } from "../constants";
 export default function Header() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   return (
     <header className="bg-white">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
-        aria-label="Global">
+        aria-label="Global"
+      >
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
@@ -22,7 +26,8 @@ export default function Header() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+          >
             <span className="sr-only">Open main menu</span>
             <svg
               className="h-6 w-6"
@@ -30,7 +35,8 @@ export default function Header() {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              aria-hidden="true">
+              aria-hidden="true"
+            >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -40,12 +46,12 @@ export default function Header() {
           </button>
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
-          <a
-            href="#"
+          <Link
+            href={routeNames.PRODUCTS}
             className="text-sm font-semibold leading-6 text-gray-900"
-            onClick={() => console.log("i m clicked")}>
-            Product
-          </a>
+          >
+            Products
+          </Link>
           <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
             Features
           </a>
@@ -62,7 +68,8 @@ export default function Header() {
           {!session ? (
             <Link
               href="/login"
-              className="text-sm font-semibold leading-6 text-gray-900">
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
               Login <span aria-hidden="true">&rarr;</span>
             </Link>
           ) : (
@@ -70,7 +77,8 @@ export default function Header() {
               onClick={() => {
                 signOut();
               }}
-              className="text-sm font-semibold leading-6 text-red-400">
+              className="text-sm font-semibold leading-6 text-red-400"
+            >
               Logout
             </button>
           )}
@@ -92,7 +100,8 @@ export default function Header() {
             </a>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700">
+              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+            >
               <span className="sr-only">Close menu</span>
               <svg
                 className="h-6 w-6"
@@ -100,7 +109,8 @@ export default function Header() {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                aria-hidden="true">
+                aria-hidden="true"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -117,7 +127,8 @@ export default function Header() {
                     type="button"
                     className="flex w-full items-center justify-between rounded-lg py-2 pl-3 pr-3.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     aria-controls="disclosure-1"
-                    aria-expanded="false">
+                    aria-expanded="false"
+                  >
                     Product
                     {/* <!--
                                         Expand/collapse icon, toggle classNamees based on menu open state.
@@ -132,61 +143,72 @@ export default function Header() {
                   <div className="mt-2 space-y-2" id="disclosure-1">
                     <a
                       href="#"
-                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
                       Analytics
                     </a>
                     <a
                       href="#"
-                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
                       Engagement
                     </a>
                     <a
                       href="#"
-                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
                       Security
                     </a>
                     <a
                       href="#"
-                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
                       Integrations
                     </a>
                     <a
                       href="#"
-                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
                       Automations
                     </a>
                     <a
                       href="#"
-                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
                       Watch demo
                     </a>
                     <a
                       href="#"
-                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                      className="block rounded-lg py-2 pl-6 pr-3 text-sm font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
                       Contact sales
                     </a>
                   </div>
                 </div>
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
                   Features
                 </a>
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
                   Marketplace
                 </a>
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
                   Company
                 </a>
               </div>
               <div className="py-6">
                 <a
                   href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                >
                   Log in
                 </a>
               </div>

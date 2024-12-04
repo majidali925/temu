@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import "../style/index.scss";
 import Header from "./components/header";
 import { SessionWrapper } from "./components/sessionWrapper";
 import { Toaster } from "react-hot-toast";
@@ -24,7 +25,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <Toaster />
         <SessionWrapper>
           <Header />
