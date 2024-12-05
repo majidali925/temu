@@ -17,7 +17,7 @@ const Inputx = ({
       className={`inputText ${className}`}
       name={name}
       {...register(name, {
-        ...(required && { required: "This field is required" }), // Only add the required rule if it's set to true
+        ...(required && { required: `${label} is required` }), // Only add the required rule if it's set to true
         ...validation, // Spread other validation rules like minLength, pattern, etc.
       })}
       type={type}

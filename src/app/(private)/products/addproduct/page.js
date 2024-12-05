@@ -1,12 +1,14 @@
 "use client";
-import Inputx from "@/app/components/Input";
+import { Selectx, Inputx } from "@/app/components";
 import ApiClient from "@/app/utils/axiosInstance";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 export default function AddProduct() {
+  const [categories, setCategories] = useState([]);
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
@@ -15,7 +17,7 @@ export default function AddProduct() {
   const fetchCategories = () => {
     ApiClient.get("/categorey")
       .then((res) => {
-        console.log({ res });
+        setCategories(res?.data);
       })
       .catch((err) => {
         console.log({ err });
@@ -49,6 +51,17 @@ export default function AddProduct() {
             errors={errors}
             register={register}
             className="inputNumber"
+          />
+          <Selectx
+            required
+            errors={errors}
+            label={"Category"}
+            name="categoreyId"
+            control={control}
+            register={register}
+            options={categories}
+            getOptionValue={(option) => option?.categoreyId}
+            getOptionLabel={(option) => option?.categoreyName}
           />
           <button type="submit" className="signin-btn">
             Create
