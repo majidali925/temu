@@ -1,7 +1,8 @@
 "use client";
 import Inputx from "@/app/components/Input";
+import ApiClient from "@/app/utils/axiosInstance";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 export default function AddProduct() {
@@ -10,6 +11,20 @@ export default function AddProduct() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const fetchCategories = () => {
+    ApiClient.get("/categorey")
+      .then((res) => {
+        console.log({ res });
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
   const router = useRouter();
 
   const onSubmit = (values) => {
