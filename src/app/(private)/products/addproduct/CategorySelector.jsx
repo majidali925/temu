@@ -1,4 +1,5 @@
 "use client";
+import { Inputx } from "@/app/components";
 import React, { useState } from "react";
 
 const CategorySelector = ({ categories = [] }) => {
@@ -7,7 +8,7 @@ const CategorySelector = ({ categories = [] }) => {
   const [finalSelection, setFinalSelection] = useState([]);
   const [popoverVisible, setPopoverVisible] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [filteredCategories, setFilteredCategories] = useState();
+  const [filteredCategories, setFilteredCategories] = useState([]);
 
   console.log({ selectedCategory, selectedPath, filteredCategories });
 
@@ -97,12 +98,13 @@ const CategorySelector = ({ categories = [] }) => {
       <div className="search-bar">
         <input
           type="text"
+          className="inputText"
           placeholder="Search category"
           value={searchTerm}
           onChange={handleSearch}
           onFocus={() => setPopoverVisible(true)}
         />
-        {filteredCategories.length > 0 && (
+        {filteredCategories?.length > 0 && (
           <div className="search-results">
             {filteredCategories.map(({ item, path }, index) => (
               <div

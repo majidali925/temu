@@ -7,6 +7,7 @@ const Inputx = ({
   errors,
   validation = {},
   className = "",
+
   ...props
 }) => (
   <div className="my-3">
