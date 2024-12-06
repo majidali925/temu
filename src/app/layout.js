@@ -4,6 +4,7 @@ import "../style/index.scss";
 import Header from "./components/header";
 import { SessionWrapper } from "./components/sessionWrapper";
 import { Toaster } from "react-hot-toast";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,8 +26,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Toaster />
         <SessionWrapper>
           <Header />
