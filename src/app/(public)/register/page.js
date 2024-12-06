@@ -1,11 +1,11 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import Inputx from "../components/Input";
 import axios from "axios";
 import GoogleLoginButton from "../../components/googlelogin";
 import { useRouter } from "next/navigation";
 import { Toast } from "../../shared/Toast";
+import { Inputx } from "@/app/components";
 
 const Register = () => {
   const {

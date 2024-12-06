@@ -4,6 +4,7 @@ import ApiClient from "@/app/utils/axiosInstance";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import CategorySelector from "./CategorySelector";
 
 export default function AddProduct() {
   const [categories, setCategories] = useState([]);
@@ -17,6 +18,7 @@ export default function AddProduct() {
   const fetchCategories = () => {
     ApiClient.get("/categorey")
       .then((res) => {
+        console.log({ res });
         setCategories(res?.data);
       })
       .catch((err) => {
@@ -52,7 +54,7 @@ export default function AddProduct() {
             register={register}
             className="inputNumber"
           />
-          <Selectx
+          {/* <Selectx
             required
             errors={errors}
             label={"Category"}
@@ -62,7 +64,9 @@ export default function AddProduct() {
             options={categories}
             getOptionValue={(option) => option?.categoreyId}
             getOptionLabel={(option) => option?.categoreyName}
-          />
+          /> */}
+
+          <CategorySelector categories={categories} />
           <button type="submit" className="signin-btn">
             Create
           </button>

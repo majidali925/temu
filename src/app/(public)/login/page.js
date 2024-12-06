@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import Inputx from "../../components/Input";
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import GoogleLoginButton from "../../components/googlelogin";
+import { Inputx } from "@/app/components";
 
 const Login = () => {
   const {

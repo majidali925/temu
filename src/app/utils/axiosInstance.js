@@ -15,7 +15,6 @@ export default ApiClient;
 // Response Interceptor
 ApiClient.interceptors.response.use(
   (response) => {
-    console.log({ response });
     if (response?.status === 403 || response?.status === 401) {
       typeof window !== "undefined" && localStorage.clear();
       signOut({ callbackUrl: "/" });
