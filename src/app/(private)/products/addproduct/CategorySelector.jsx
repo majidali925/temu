@@ -22,7 +22,6 @@ const CategorySelector = ({
       setSelectedCategory(category);
     }
   };
-  console.log({ selectedCategory });
 
   const handleSearch = (event) => {
     const search = event.target.value.toLowerCase();
