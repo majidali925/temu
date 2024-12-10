@@ -1,16 +1,17 @@
 "use client";
-import { Inputx } from "@/app/components";
 import React, { useState } from "react";
 
-const CategorySelector = ({ categories = [] }) => {
+const CategorySelector = ({
+  categories = [],
+  finalSelectCategory,
+  selectedCategory,
+  setSelectedCategory,
+}) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedPath, setSelectedPath] = useState([]);
   const [finalSelection, setFinalSelection] = useState([]);
   const [popoverVisible, setPopoverVisible] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [filteredCategories, setFilteredCategories] = useState([]);
-
-  console.log({ selectedCategory, selectedPath, filteredCategories });
 
   const handleCategoryClick = (category, level) => {
     if (category?.children?.length > 0) {
@@ -21,6 +22,7 @@ const CategorySelector = ({ categories = [] }) => {
       setSelectedCategory(category);
     }
   };
+  console.log({ selectedCategory });
 
   const handleSearch = (event) => {
     const search = event.target.value.toLowerCase();
@@ -64,6 +66,12 @@ const CategorySelector = ({ categories = [] }) => {
     setFinalSelection([...selectedPath, selectedCategory]);
     setPopoverVisible(false);
   };
+
+  const CategoryTree = (selectedTree) => {
+    const tree = selectedTree.map((cat) => cat.categoryName).join(" > ");
+    finalSelectCategory(tree);
+    return tree;
+  };
   const renderCategories = (categories, level = 0) => {
     return (
       <div className="category-level" style={{ marginLeft: level * 1 }}>
@@ -78,8 +86,7 @@ const CategorySelector = ({ categories = [] }) => {
                 selectedCategory.categoryName === category.categoryName
                   ? "#d3f3ff"
                   : "transparent",
-            }}
-          >
+            }}>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <label>{category.categoryName}</label>
               {category.children.length > 0 && <span>{">"}</span>}
@@ -89,8 +96,6 @@ const CategorySelector = ({ categories = [] }) => {
       </div>
     );
   };
-
-  console.log({ finalSelection });
 
   return (
     <div className="category-selector">
@@ -110,8 +115,7 @@ const CategorySelector = ({ categories = [] }) => {
               <div
                 key={index}
                 className="search-result"
-                onClick={() => handleSearchSelect({ item, path })}
-              >
+                onClick={() => handleSearchSelect({ item, path })}>
                 {path.map((p) => p.categoryName).join(" > ")}
               </div>
             ))}
@@ -142,8 +146,7 @@ const CategorySelector = ({ categories = [] }) => {
 
       {finalSelection.length > 0 && (
         <div className="selected-path">
-          <strong>Current selection:</strong>{" "}
-          {finalSelection.map((cat) => cat.categoryName).join(" > ")}
+          <strong>Current selection:</strong> {CategoryTree(finalSelection)}
         </div>
       )}
     </div>

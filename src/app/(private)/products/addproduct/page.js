@@ -1,13 +1,17 @@
 "use client";
-import { Selectx, Inputx } from "@/app/components";
+import { Inputx } from "@/app/components";
 import ApiClient from "@/app/utils/axiosInstance";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import CategorySelector from "./CategorySelector";
+import { Toast } from "@/app/shared/Toast";
 
 export default function AddProduct() {
   const [categories, setCategories] = useState([]);
+  const [categoryTree, setCategoryTree] = useState();
+  const [selectedCategory, setSelectedCategory] = useState("");
+
   const {
     control,
     register,
@@ -18,8 +22,7 @@ export default function AddProduct() {
   const fetchCategories = () => {
     ApiClient.get("/categorey")
       .then((res) => {
-        console.log({ res });
-        setCategories(res?.data);
+        res && setCategories(res?.data);
       })
       .catch((err) => {
         console.log({ err });
@@ -29,10 +32,17 @@ export default function AddProduct() {
   useEffect(() => {
     fetchCategories();
   }, []);
-  const router = useRouter();
 
   const onSubmit = (values) => {
     console.log("values", values);
+    values = {
+      ...values,
+      categoryTree,
+      categoryId: selectedCategory.categoryId,
+    };
+    ApiClient.post("/product/create", values).then((res) => {
+      res && Toast("Product Added Successfully");
+    });
   };
   return (
     <div className="product-form-container">
@@ -66,7 +76,13 @@ export default function AddProduct() {
             getOptionLabel={(option) => option?.categoreyName}
           /> */}
 
-          <CategorySelector categories={categories} />
+          <CategorySelector
+            name="category"
+            categories={categories}
+            finalSelectCategory={setCategoryTree}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+          />
           <button type="submit" className="signin-btn">
             Create
           </button>
