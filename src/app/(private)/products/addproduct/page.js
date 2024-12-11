@@ -1,11 +1,11 @@
 "use client";
 import { Inputx } from "@/app/components";
 import ApiClient from "@/app/utils/axiosInstance";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import CategorySelector from "./CategorySelector";
 import { Toast } from "@/app/shared/Toast";
+import ImageUploader from "@/app/components/upload";
 
 export default function AddProduct() {
   const [categories, setCategories] = useState([]);
@@ -44,10 +44,21 @@ export default function AddProduct() {
       res && Toast("Product Added Successfully");
     });
   };
+
+  const handleImageUpload = (file) => {
+    console.log("Uploaded file:", file);
+  };
   return (
     <div className="product-form-container">
       <div className="product-form">
         <form onSubmit={handleSubmit(onSubmit)}>
+          <div style={{ padding: "10px", margin: "0 auto" }}>
+            {/* <h2>Custom Image Uploader</h2> */}
+            <ImageUploader
+              onImageUpload={handleImageUpload}
+              label="Drag and Drop or Click to Upload"
+            />
+          </div>
           <Inputx
             name="productName"
             label={"Product Name"}

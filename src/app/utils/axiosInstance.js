@@ -12,6 +12,21 @@ const ApiClient = axios.create({
 });
 export default ApiClient;
 
+export const uploadFile = async (formData) => {
+  try {
+    const response = await ApiClient.post("file/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // Override default
+      },
+    });
+    Toast({ message: response.message });
+    return response.url;
+  } catch (error) {
+    console.error("Error uploading file:", error);
+    throw error;
+  }
+};
+
 // Response Interceptor
 ApiClient.interceptors.response.use(
   (response) => {

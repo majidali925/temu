@@ -1,4 +1,5 @@
 import Selectx from "./Select";
 import Inputx from "./Input";
+import upload from "./upload";
 
-export { Selectx, Inputx };
+export { Selectx, Inputx, upload };
